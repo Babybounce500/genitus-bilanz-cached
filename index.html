@@ -102,7 +102,16 @@
       bilanzData = await res.json();
       const count = Object.keys(bilanzData).length;
       document.getElementById('cacheBadge').textContent = `● ${count} Symbole gecacht`;
-      renderPicker();
+      const deepLinkSym = new URLSearchParams(window.location.search).get('sym');
+      if(deepLinkSym && bilanzData[deepLinkSym]){
+        currentIndex = bilanzData[deepLinkSym].index || 'SP500';
+        document.getElementById('tabSP500').classList.toggle('active', currentIndex==='SP500');
+        document.getElementById('tabDAX').classList.toggle('active', currentIndex==='DAX');
+        renderPicker();
+        selectSymbol(deepLinkSym);
+      } else {
+        renderPicker();
+      }
     }catch(e){
       document.getElementById('cacheBadge').textContent = '● Cache-Fehler';
       document.getElementById('pickerList').innerHTML = `<div class="picker-empty">Cache konnte nicht geladen werden: ${e.message}</div>`;
