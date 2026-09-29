@@ -70,13 +70,24 @@
 </header>
 <div class="layout">
   <div class="picker-panel">
-    <div class="index-tabs">
-      <div class="index-tab active" id="tabSP500" onclick="switchIndex('SP500')">S&amp;P 500</div>
-      <div class="index-tab" id="tabDAX" onclick="switchIndex('DAX')">DAX 40</div>
-      <div class="index-tab" id="tabCAC40" onclick="switchIndex('CAC40')">CAC 40</div>
-      <div class="index-tab" id="tabNASDAQ100" onclick="switchIndex('NASDAQ100')">NASDAQ-100</div>
-      <div class="index-tab" id="tabMDAX" onclick="switchIndex('MDAX')">MDAX</div>
-    </div>
+    <div><span class="field-label">Index</span><select id="indexSelect" onchange="switchIndex(this.value)">
+      <option value="SP500">S&amp;P 500 (US)</option>
+      <option value="DAX">DAX 40 (DE)</option>
+      <option value="MDAX">MDAX (DE)</option>
+      <option value="CAC40">CAC 40 (FR)</option>
+      <option value="NASDAQ100">NASDAQ-100 (US)</option>
+      <option value="FTSE100">FTSE 100 (UK)</option>
+      <option value="SMI">SMI (CH)</option>
+      <option value="IBEX35">IBEX 35 (ES)</option>
+      <option value="FTSEMIB">FTSE MIB (IT)</option>
+      <option value="AEX">AEX (NL)</option>
+      <option value="OMXS30">OMX Stockholm 30 (SE)</option>
+      <option value="OMXC25">OMX Copenhagen 25 (DK)</option>
+      <option value="BEL20">BEL 20 (BE)</option>
+      <option value="PSI20">PSI-20 (PT)</option>
+      <option value="TSX60">S&amp;P/TSX 60 (CA)</option>
+      <option value="HANGSENG">Hang Seng (HK)</option>
+    </select></div>
     <div><span class="field-label">Search Symbol / Name</span><input type="text" id="searchInput" placeholder="e.g. Apple, SAP..." oninput="renderPicker()"></div>
     <div class="picker-list" id="pickerList"><div class="picker-empty">Cache lädt...</div></div>
   </div>
@@ -108,11 +119,7 @@
       const deepLinkSym = new URLSearchParams(window.location.search).get('sym');
       if(deepLinkSym && bilanzData[deepLinkSym]){
         currentIndex = bilanzData[deepLinkSym].index || 'SP500';
-        document.getElementById('tabSP500').classList.toggle('active', currentIndex==='SP500');
-        document.getElementById('tabDAX').classList.toggle('active', currentIndex==='DAX');
-        document.getElementById('tabCAC40').classList.toggle('active', currentIndex==='CAC40');
-        document.getElementById('tabNASDAQ100').classList.toggle('active', currentIndex==='NASDAQ100');
-        document.getElementById('tabMDAX').classList.toggle('active', currentIndex==='MDAX');
+        document.getElementById('indexSelect').value = currentIndex;
         renderPicker();
         selectSymbol(deepLinkSym);
       } else {
@@ -126,11 +133,7 @@
 
   function switchIndex(idx){
     currentIndex = idx;
-    document.getElementById('tabSP500').classList.toggle('active', idx==='SP500');
-    document.getElementById('tabDAX').classList.toggle('active', idx==='DAX');
-    document.getElementById('tabCAC40').classList.toggle('active', idx==='CAC40');
-    document.getElementById('tabNASDAQ100').classList.toggle('active', idx==='NASDAQ100');
-    document.getElementById('tabMDAX').classList.toggle('active', idx==='MDAX');
+    document.getElementById('indexSelect').value = idx;
     document.getElementById('searchInput').value='';
     renderPicker();
   }
