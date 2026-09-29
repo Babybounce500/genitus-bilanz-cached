@@ -73,6 +73,9 @@
     <div class="index-tabs">
       <div class="index-tab active" id="tabSP500" onclick="switchIndex('SP500')">S&amp;P 500</div>
       <div class="index-tab" id="tabDAX" onclick="switchIndex('DAX')">DAX 40</div>
+      <div class="index-tab" id="tabCAC40" onclick="switchIndex('CAC40')">CAC 40</div>
+      <div class="index-tab" id="tabNASDAQ100" onclick="switchIndex('NASDAQ100')">NASDAQ-100</div>
+      <div class="index-tab" id="tabMDAX" onclick="switchIndex('MDAX')">MDAX</div>
     </div>
     <div><span class="field-label">Search Symbol / Name</span><input type="text" id="searchInput" placeholder="e.g. Apple, SAP..." oninput="renderPicker()"></div>
     <div class="picker-list" id="pickerList"><div class="picker-empty">Cache lädt...</div></div>
@@ -107,6 +110,9 @@
         currentIndex = bilanzData[deepLinkSym].index || 'SP500';
         document.getElementById('tabSP500').classList.toggle('active', currentIndex==='SP500');
         document.getElementById('tabDAX').classList.toggle('active', currentIndex==='DAX');
+        document.getElementById('tabCAC40').classList.toggle('active', currentIndex==='CAC40');
+        document.getElementById('tabNASDAQ100').classList.toggle('active', currentIndex==='NASDAQ100');
+        document.getElementById('tabMDAX').classList.toggle('active', currentIndex==='MDAX');
         renderPicker();
         selectSymbol(deepLinkSym);
       } else {
@@ -122,6 +128,9 @@
     currentIndex = idx;
     document.getElementById('tabSP500').classList.toggle('active', idx==='SP500');
     document.getElementById('tabDAX').classList.toggle('active', idx==='DAX');
+    document.getElementById('tabCAC40').classList.toggle('active', idx==='CAC40');
+    document.getElementById('tabNASDAQ100').classList.toggle('active', idx==='NASDAQ100');
+    document.getElementById('tabMDAX').classList.toggle('active', idx==='MDAX');
     document.getElementById('searchInput').value='';
     renderPicker();
   }
